@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { useMsal } from "@azure/msal-react";
-import Button from "@mui/material/Button";
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+import { 
+    Button, 
+    Menu, 
+    MenuTrigger, 
+    MenuPopover, 
+    MenuList, 
+    MenuItem 
+} from "@fluentui/react-components";
 import { loginRequest } from "../authConfig";
 
 export const SignInButton = () => {
     const { instance } = useMsal();
 
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-
     const handleLogin = (loginType) => {
-        setAnchorEl(null);
-
         if (loginType === "popup") {
             instance.loginPopup(loginRequest).catch((e) =>{ console.error(`loginPopup failed: ${e}`) });
         } else if (loginType === "redirect") {
@@ -22,31 +22,22 @@ export const SignInButton = () => {
     }
 
     return (
-        <div>
-            <Button
-                onClick={(event) => setAnchorEl(event.currentTarget)}
-                color="inherit"
-            >
-                Login
-            </Button>
-            <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-                }}
-                open={open}
-                onClose={() => setAnchorEl(null)}
-            >
-                <MenuItem onClick={() => handleLogin("popup")} key="loginPopup">Sign in using Popup</MenuItem>
-                <MenuItem onClick={() => handleLogin("redirect")} key="loginRedirect">Sign in using Redirect</MenuItem>
-            </Menu>
-        </div>
+        <Menu>
+            <MenuTrigger>
+                <Button appearance="primary">
+                    Login
+                </Button>
+            </MenuTrigger>
+            <MenuPopover>
+                <MenuList>
+                    <MenuItem onClick={() => handleLogin("popup")}>
+                        Sign in using Popup
+                    </MenuItem>
+                    <MenuItem onClick={() => handleLogin("redirect")}>
+                        Sign in using Redirect
+                    </MenuItem>
+                </MenuList>
+            </MenuPopover>
+        </Menu>
     )
 };

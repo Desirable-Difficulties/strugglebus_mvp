@@ -1,14 +1,14 @@
 import React from 'react';
 import { useMsal } from "@azure/msal-react";
-import Avatar from '@mui/material/Avatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
+import { 
+    Dialog, 
+    DialogSurface, 
+    DialogTitle, 
+    DialogContent,
+    Button,
+    Text
+} from "@fluentui/react-components";
+import { PersonRegular, AddRegular } from "@fluentui/react-icons";
 import { loginRequest } from "../authConfig";
 
 export const AccountPicker = (props) => {
@@ -31,29 +31,50 @@ export const AccountPicker = (props) => {
     };
 
     return (
-        <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
-          <DialogTitle id="simple-dialog-title">Set active account</DialogTitle>
-          <List>
-            {accounts.map((account) => (
-              <ListItem button onClick={() => handleListItemClick(account)} key={account.homeAccountId}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <PersonIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={account.name} secondary={account.username} />
-              </ListItem>
-            ))}
-    
-            <ListItem autoFocus button onClick={() => handleListItemClick(null)}>
-              <ListItemAvatar>
-                <Avatar>
-                  <AddIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Add account" />
-            </ListItem>
-          </List>
+        <Dialog open={open} onOpenChange={(event, data) => !data.open && onClose()}>
+            <DialogSurface>
+                <DialogTitle>Set active account</DialogTitle>
+                <DialogContent>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        {accounts.map((account) => (
+                            <Button 
+                                key={account.homeAccountId}
+                                appearance="subtle"
+                                onClick={() => handleListItemClick(account)}
+                                style={{ 
+                                    justifyContent: 'flex-start', 
+                                    display: 'flex', 
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    padding: '12px'
+                                }}
+                            >
+                                <PersonRegular />
+                                <div style={{ textAlign: 'left' }}>
+                                    <Text weight="semibold">{account.name}</Text>
+                                    <br />
+                                    <Text size={200}>{account.username}</Text>
+                                </div>
+                            </Button>
+                        ))}
+                
+                        <Button 
+                            appearance="subtle"
+                            onClick={() => handleListItemClick(null)}
+                            style={{ 
+                                justifyContent: 'flex-start', 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                gap: '10px',
+                                padding: '12px'
+                            }}
+                        >
+                            <AddRegular />
+                            <Text>Add account</Text>
+                        </Button>
+                    </div>
+                </DialogContent>
+            </DialogSurface>
         </Dialog>
-      );
+    );
 };

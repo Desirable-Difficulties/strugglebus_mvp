@@ -1,78 +1,99 @@
 import React from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from '@mui/icons-material/Person';
-import WorkIcon  from "@mui/icons-material/Work";
-import MailIcon from '@mui/icons-material/Mail';
-import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Text, Avatar } from "@fluentui/react-components";
+import { 
+    PersonRegular, 
+    BriefcaseRegular, 
+    MailRegular, 
+    CallRegular, 
+    LocationRegular 
+} from "@fluentui/react-icons";
 
 export const ProfileData = ({graphData}) => {
     return (
-        <List className="profileData">
+        <div style={{ padding: '20px' }}>
             <NameListItem name={graphData.displayName} />
             <JobTitleListItem jobTitle={graphData.jobTitle} />
             <MailListItem mail={graphData.mail} />
             <PhoneListItem phone={graphData.businessPhones[0]} />
             <LocationListItem location={graphData.officeLocation} />
-        </List>
+        </div>
     );
 };
 
+const ListItemStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    padding: '12px 0',
+    borderBottom: '1px solid #e1e1e1'
+};
+
 const NameListItem = ({name}) => (
-    <ListItem>
-        <ListItemAvatar>
-            <Avatar>
-                <PersonIcon />
-            </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Name" secondary={name}/>
-    </ListItem>
+    <div style={ListItemStyle}>
+        <Avatar
+            color="colorful"
+            icon={<PersonRegular />}
+        />
+        <div>
+            <Text weight="semibold">Name</Text>
+            <br />
+            <Text>{name}</Text>
+        </div>
+    </div>
 );
 
 const JobTitleListItem = ({jobTitle}) => (
-    <ListItem>
-        <ListItemAvatar>
-            <Avatar>
-                <WorkIcon />
-            </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Title" secondary={jobTitle}/>
-    </ListItem>
+    <div style={ListItemStyle}>
+        <Avatar
+            color="colorful"
+            icon={<BriefcaseRegular />}
+        />
+        <div>
+            <Text weight="semibold">Title</Text>
+            <br />
+            <Text>{jobTitle}</Text>
+        </div>
+    </div>
 );
 
 const MailListItem = ({mail}) => (
-    <ListItem>
-        <ListItemAvatar>
-            <Avatar>
-                <MailIcon />
-            </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Mail" secondary={mail}/>
-    </ListItem>
+    <div style={ListItemStyle}>
+        <Avatar
+            color="colorful"
+            icon={<MailRegular />}
+        />
+        <div>
+            <Text weight="semibold">Email</Text>
+            <br />
+            <Text>{mail}</Text>
+        </div>
+    </div>
 );
 
 const PhoneListItem = ({phone}) => (
-    <ListItem>
-        <ListItemAvatar>
-            <Avatar>
-                <PhoneIcon />
-            </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Phone" secondary={phone}/>
-    </ListItem>
+    <div style={ListItemStyle}>
+        <Avatar
+            color="colorful"
+            icon={<CallRegular />}
+        />
+        <div>
+            <Text weight="semibold">Phone</Text>
+            <br />
+            <Text>{phone}</Text>
+        </div>
+    </div>
 );
 
 const LocationListItem = ({location}) => (
-    <ListItem>
-        <ListItemAvatar>
-            <Avatar>
-                <LocationOnIcon />
-            </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Location" secondary={location}/>
-    </ListItem>
+    <div style={ListItemStyle}>
+        <Avatar
+            color="colorful"
+            icon={<LocationRegular />}
+        />
+        <div>
+            <Text weight="semibold">Location</Text>
+            <br />
+            <Text>{location}</Text>
+        </div>
+    </div>
 );

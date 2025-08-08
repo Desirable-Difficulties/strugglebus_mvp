@@ -4,8 +4,7 @@ import { loginRequest } from "../src/authConfig";
 import React, { useEffect, useState } from "react";
 import { ProfileData } from "../src/ui-components/ProfileData";
 import { callMsGraph } from "../src/utils/MsGraphApiCall";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import { Card, Text } from "@fluentui/react-components";
 
 const ProfileContent = () => {
     const { instance, inProgress } = useMsal();
@@ -25,18 +24,18 @@ const ProfileContent = () => {
     }, [inProgress, graphData, instance]);
   
     return (
-        <Paper>
+        <Card style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
             { graphData ? <ProfileData graphData={graphData} /> : null }
-        </Paper>
+        </Card>
     );
 };
 
 const ErrorComponent = ({error}) => {
-    return <Typography variant="h6">An Error Occurred: {error.errorCode}</Typography>;
+    return <Text size={400}>An Error Occurred: {error.errorCode}</Text>;
 }
 
 const Loading = () => {
-    return <Typography variant="h6">Authentication in progress...</Typography>
+    return <Text size={400}>Authentication in progress...</Text>
 }
 
 export default function Profile() {

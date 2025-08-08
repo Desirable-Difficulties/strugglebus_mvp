@@ -2,8 +2,8 @@
 
 ## About this sample
 
-This developer sample is used to run basic use cases for the MSAL library. You can also alter the configuration in `./src/authConfig.js` to execute other behaviors.
-This sample was bootstrapped with [Learn Next.js](https://nextjs.org/learn).
+This developer sample is used to run basic use cases for the MSAL library with Microsoft Fluent UI components. You can also alter the configuration in `./src/authConfig.js` to execute other behaviors.
+This sample was bootstrapped with [Learn Next.js](https://nextjs.org/learn) and uses Microsoft Fluent UI for design consistency.
 
 ## Notable files and what they demonstrate
 

@@ -1,19 +1,21 @@
 import React from "react";
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Button } from "@fluentui/react-components";
+import { Text } from "@fluentui/react-components";
 
 export default function Home() {
   return (
       <>
           <AuthenticatedTemplate>
-              <Button variant="contained" color="primary" href="/profile">Request Profile Information</Button>
+              <Button appearance="primary" as="a" href="/profile">
+                Request Profile Information
+              </Button>
           </AuthenticatedTemplate>
 
           <UnauthenticatedTemplate>
-            <Typography variant="h6">
-              <center>Please sign-in to see your profile information.</center>
-            </Typography>
+            <Text align="center" size={500}>
+              Please sign-in to see your profile information.
+            </Text>
           </UnauthenticatedTemplate>
       </>
   );

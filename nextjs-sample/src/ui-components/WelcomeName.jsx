@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { InteractionStatus } from "@azure/msal-browser";
-import Typography from "@mui/material/Typography";
+import { Text } from "@fluentui/react-components";
 
 const WelcomeName = () => {
     const { instance, inProgress } = useMsal();
@@ -17,7 +17,7 @@ const WelcomeName = () => {
     }, [activeAccount]);
 
     if (name) {
-        return <Typography variant="h6">Welcome, {name}</Typography>;
+        return <Text size={400} weight="semibold">Welcome, {name}</Text>;
     } else {
         return null;
     }
